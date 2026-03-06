@@ -20,25 +20,42 @@ background-image:url("soria-inimaginable.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-min-height:500px;
+height:500px;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 color:white;
-padding:40px 20px;
 }
-  
-  @media (max-width:768px){
 
 header h1{
+font-size:75px;
+letter-spacing:8px;
+text-transform:uppercase;
+background:rgba(0,0,0,0.35);
+padding:25px 60px;
+border-radius:12px;
+font-weight:700;
+font-family:Georgia, serif;
+}
+
+  @media (max-width:768px){
+
+header{
+position:relative;
+}
+
+header h1{
+position:absolute;
+top:40%;
+left:50%;
+transform:translate(-50%, -50%);
 font-size:38px;
-letter-spacing:4px;
 padding:15px 25px;
+letter-spacing:4px;
 }
 
 }
-
 .imagen-superpuesta{
 position:absolute;
 left:40px;
@@ -294,3 +311,4 @@ lugares y paisajes de la provincia.
 </body>
 
 </html>
+
