@@ -16,18 +16,27 @@ color:#333;
 }
 
 header{
-background-image:url("soria-inimaginable.jpg.jpeg");
+background-image:url("soria-inimaginable.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-height:500px;
+min-height:500px;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 color:white;
-position:relative;
-overflow:hidden;
+padding:40px 20px;
+}
+  
+  @media (max-width:768px){
+
+header h1{
+font-size:38px;
+letter-spacing:4px;
+padding:15px 25px;
+}
+
 }
 
 .imagen-superpuesta{
@@ -283,4 +292,5 @@ lugares y paisajes de la provincia.
 </footer>
 
 </body>
+
 </html>
