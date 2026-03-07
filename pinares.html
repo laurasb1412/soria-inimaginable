@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pinares | Soria Inimaginable</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f4f4;
+color:#333;
+}
+
+header{
+background-image:url("soria-inimaginable.jpg.jpeg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+height:500px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+header h1{
+position:absolute;
+top:72%;
+left:50%;
+transform:translate(-50%, -50%);
+font-size:75px;
+letter-spacing:8px;
+text-transform:uppercase;
+background:rgba(0,0,0,0.35);
+padding:25px 60px;
+border-radius:12px;
+font-weight:700;
+font-family:Georgia, serif;
+z-index:2;
+white-space:nowrap;
+}
+
+header img{
+position:absolute;
+left:60px;
+top:80px;
+width:220px;
+z-index:1;
+}
+
+@media (max-width:768px){
+
+header{
+height:380px;
+}
+
+header h1{
+top:72%;
+left:50%;
+transform:translate(-50%, -50%);
+font-size:34px;
+letter-spacing:4px;
+padding:12px 20px;
+white-space:normal;
+width:85%;
+line-height:1.1;
+}
+
+header img{
+left:20px;
+top:40px;
+width:140px;
+}
+
+nav{
+padding:12px 8px;
+}
+
+nav a{
+display:inline-block;
+margin:6px 10px;
+font-size:15px;
+}
+
+section{
+padding:40px 20px;
+}
+}
+
+nav{
+background:#1f3c5c;
+padding:15px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:0 20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+section{
+max-width:1000px;
+margin:auto;
+padding:60px 20px;
+}
+
+h2{
+text-align:center;
+color:#1f3c5c;
+font-size:38px;
+margin-bottom:10px;
+}
+
+.subtitulo{
+text-align:center;
+max-width:800px;
+margin:0 auto 40px auto;
+font-size:18px;
+line-height:1.6;
+}
+
+.contenido{
+background:white;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+padding:30px;
+max-width:800px;
+margin:auto;
+}
+
+.contenido h3{
+color:#1f3c5c;
+margin-top:0;
+text-align:center;
+}
+
+.contenido ul{
+columns:2;
+gap:40px;
+padding-left:20px;
+}
+
+.contenido li{
+margin-bottom:10px;
+}
+
+.volver{
+text-align:center;
+margin-top:30px;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 25px;
+background:#1f3c5c;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+footer{
+background:#1f3c5c;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+
+@media (max-width:768px){
+.contenido ul{
+columns:1;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="soria-inimaginable.jpg.jpeg" alt="Portada Soria Inimaginable">
+<h1>Pinares</h1>
+</header>
+
+<nav>
+<a href="index.html#soria">Soria</a>
+<a href="index.html#sabias">¿Sabías que?</a>
+<a href="index.html#comarcas">Comarcas</a>
+<a href="index.html#instagram">Instagram</a>
+</nav>
+
+<section>
+<h2>Comarca de Pinares</h2>
+
+<p class="subtitulo">
+Región conocida por sus extensos bosques de pino, sus paisajes naturales y algunos de los pueblos más emblemáticos del noroeste soriano.
+</p>
+
+<div class="contenido">
+<h3>Municipios de la comarca</h3>
+
+<ul>
+<li>Abejar</li>
+<li>Cabrejas del Pinar</li>
+<li>Casarejos</li>
+<li>Covaleda</li>
+<li>Cubilla</li>
+<li>Duruelo de la Sierra</li>
+<li>Herrera de Soria</li>
+<li>Molinos de Duero</li>
+<li>Montenegro de Cameros</li>
+<li>Muriel de la Fuente</li>
+<li>Muriel Viejo</li>
+<li>Navaleno</li>
+<li>Salduero</li>
+<li>San Leonardo de Yagüe</li>
+<li>Talveila</li>
+<li>Vadillo</li>
+<li>Vinuesa</li>
+</ul>
+
+<div class="volver">
+<a class="btn" href="index.html">← Volver a la página principal</a>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Soria Inimaginable</p>
+</footer>
+
+</body>
+</html>
