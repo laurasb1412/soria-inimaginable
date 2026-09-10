@@ -1,66 +1,870 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Campo de Gómara | Soria Inimaginable</title>
 
 <style>
+
+/* =========================
+   ESTILO GENERAL
+========================= */
+
 body{
-font-family:Arial;
-max-width:900px;
-margin:auto;
-padding:40px;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+    color:#333;
 }
 
-h1{
-color:#1f3c5c;
+
+/* =========================
+   CABECERA
+========================= */
+
+header{
+    background-image:url("soria-inimaginable.jpg.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    height:500px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    overflow:hidden;
 }
 
-ul{
-columns:2;
+header::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.15);
 }
+
+header h1{
+    position:absolute;
+    top:72%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:75px;
+    letter-spacing:8px;
+    text-transform:uppercase;
+    background:rgba(0,0,0,0.35);
+    padding:25px 60px;
+    border-radius:12px;
+    font-weight:700;
+    font-family:Georgia, serif;
+    z-index:2;
+    white-space:nowrap;
+}
+
+header img{
+    position:absolute;
+    left:60px;
+    top:80px;
+    width:220px;
+    z-index:2;
+}
+
+
+/* =========================
+   MENÚ
+========================= */
+
+nav{
+    background:#1f3c5c;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    margin:0 20px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+nav a:hover{
+    color:#d7e3ef;
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+section{
+    max-width:1100px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+h2{
+    text-align:center;
+    color:#1f3c5c;
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.subtitulo{
+    text-align:center;
+    max-width:800px;
+    margin:0 auto 40px auto;
+    font-size:18px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.estadisticas{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin:0 auto 50px auto;
+}
+
+.estadistica{
+    background:white;
+    border-radius:14px;
+    padding:25px 15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.estadistica:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.icono{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.estadistica span{
+    display:block;
+    color:#1f3c5c;
+    font-weight:bold;
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.estadistica strong{
+    display:block;
+    color:#333;
+    font-family:Georgia, serif;
+    font-size:36px;
+    margin-bottom:4px;
+}
+
+.estadistica small{
+    color:#777;
+    font-size:13px;
+}
+
+
+/* =========================
+   TARJETAS MUNICIPIOS
+========================= */
+
+.municipios-titulo{
+    text-align:center;
+    color:#1f3c5c;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.municipios-subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.municipios{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.municipio{
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    cursor:pointer;
+    transition:all 0.25s ease;
+    border-left:5px solid #1f3c5c;
+}
+
+.municipio:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.15);
+    background:#fdfdfd;
+}
+
+.municipio h3{
+    margin:0;
+    color:#1f3c5c;
+    font-family:Georgia, serif;
+    font-size:21px;
+}
+
+.municipio p{
+    margin:8px 0 0 0;
+    color:#777;
+    font-size:14px;
+}
+
+.municipio .flecha{
+    float:right;
+    font-size:20px;
+    color:#1f3c5c;
+}
+
+
+/* =========================
+   VENTANA DE INFORMACIÓN
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:10;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.modal-contenido{
+    background:white;
+    width:100%;
+    max-width:650px;
+    border-radius:15px;
+    padding:35px;
+    box-sizing:border-box;
+    position:relative;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    animation:aparecer 0.25s ease;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.cerrar{
+    position:absolute;
+    right:20px;
+    top:15px;
+    font-size:30px;
+    color:#777;
+    cursor:pointer;
+}
+
+.cerrar:hover{
+    color:#1f3c5c;
+}
+
+.modal-contenido h3{
+    color:#1f3c5c;
+    font-family:Georgia, serif;
+    font-size:30px;
+    margin-top:0;
+}
+
+.info-municipio{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:25px 0;
+}
+
+.dato{
+    background:#f4f4f4;
+    padding:15px 10px;
+    text-align:center;
+    border-radius:10px;
+}
+
+.dato strong{
+    display:block;
+    color:#1f3c5c;
+    font-size:24px;
+}
+
+.dato span{
+    font-size:12px;
+    color:#777;
+}
+
+.descripcion{
+    line-height:1.6;
+    color:#555;
+}
+
+
+/* =========================
+   BOTÓN VOLVER
+========================= */
+
+.volver{
+    text-align:center;
+    margin-top:45px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#1f3c5c;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    transition:0.2s;
+}
+
+.btn:hover{
+    background:#162d45;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#1f3c5c;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:50px;
+}
+
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width:768px){
+
+    header{
+        height:380px;
+    }
+
+    header h1{
+        top:72%;
+        font-size:34px;
+        letter-spacing:4px;
+        padding:12px 20px;
+        white-space:normal;
+        width:85%;
+        line-height:1.1;
+    }
+
+    header img{
+        left:20px;
+        top:40px;
+        width:140px;
+    }
+
+    nav{
+        padding:12px 8px;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:6px 10px;
+        font-size:15px;
+    }
+
+    section{
+        padding:40px 20px;
+    }
+
+    .estadisticas{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    .estadistica{
+        padding:20px 10px;
+    }
+
+    .estadistica strong{
+        font-size:30px;
+    }
+
+    .municipios{
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+
+    .info-municipio{
+        grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .modal-contenido{
+        padding:25px;
+    }
+
+}
+
 </style>
-
 </head>
+
 
 <body>
 
-<h1>Campo de Gómara</h1>
 
-<p>La comarca de Campo de Gómara se caracteriza por su paisaje agrícola y sus pueblos históricos.</p>
+<!-- =========================
+     CABECERA
+========================= -->
 
-<h2>Compuesta por 22 municipios.</h2>
+<header>
 
-<h3>Población total 1505: con 898 hombres y 607 mujeres.</h3>
+    <img src="soria-inimaginable.jpg.jpeg"
+         alt="Portada Soria Inimaginable">
 
-<h4>Municipios de la comarca</h4>
+    <h1>Campo de Gómara</h1>
 
-<ul>
-<li>Aldealafuente</li>
-<li>Aliud</li>
-<li>Almanzul</li>
-<li>Almenar de Soria</li>
-<li>Bliecos</li>
-<li>Buberos</li>
-<li>Cabrejas del Campo</li>
-<li>Candilichera</li>
-<li>Carabantes</li>
-<li>Cihuela</li>
-<li>Ciria</li>
-<li>Deza</li>
-<li>Gómara</li>
-<li>Hinojosa del Campo</li>
-<li>Pinilla del Campo</li>
-<li>Portillo de Soria</li>
-<li>Quiñonería</li>
-<li>Reznos</li>
-<li>Tahahuerce</li>
-<li>Tejado</li>
-<li>Torrubia de Soria</li>
-<li>Villaseca de Arciel</li>
-</ul>
+</header>
 
-<a href="index.html">← Volver</a>
+
+<!-- =========================
+     MENÚ
+========================= -->
+
+<nav>
+
+    <a href="index.html#soria">Soria</a>
+
+    <a href="index.html#sabias">¿Sabías que?</a>
+
+    <a href="index.html#comarcas">Comarcas</a>
+
+    <a href="index.html#instagram">Instagram</a>
+
+</nav>
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<section>
+
+    <h2>Campo de Gómara</h2>
+
+    <p class="subtitulo">
+        Región caracterizada por su paisaje agrícola y sus pueblos históricos.
+    </p>
+
+
+    <!-- ESTADÍSTICAS -->
+
+    <div class="estadisticas">
+
+        <div class="estadistica">
+
+            <div class="icono">🏘️</div>
+
+            <span>Municipios</span>
+
+            <strong>22</strong>
+
+            <small>municipios</small>
+
+        </div>
+
+
+        <div class="estadistica">
+
+            <div class="icono">👥</div>
+
+            <span>Población total</span>
+
+            <strong>1.505</strong>
+
+            <small>habitantes</small>
+
+        </div>
+
+
+        <div class="estadistica">
+
+            <div class="icono">♂</div>
+
+            <span>Hombres</span>
+
+            <strong>898</strong>
+
+            <small>habitantes</small>
+
+        </div>
+
+
+        <div class="estadistica">
+
+            <div class="icono">♀</div>
+
+            <span>Mujeres</span>
+
+            <strong>607</strong>
+
+            <small>habitantes</small>
+
+        </div>
+
+    </div>
+
+
+    <!-- MUNICIPIOS -->
+
+    <h3 class="municipios-titulo">
+        Municipios de la comarca
+    </h3>
+
+    <p class="municipios-subtitulo">
+        Selecciona un municipio para consultar su información.
+    </p>
+
+
+    <div class="municipios">
+
+
+        <div class="municipio" onclick="abrirMunicipio('Aldealafuente')">
+            <span class="flecha">→</span>
+            <h3>Aldealafuente</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Aliud')">
+            <span class="flecha">→</span>
+            <h3>Aliud</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Almanzul')">
+            <span class="flecha">→</span>
+            <h3>Almanzul</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Almenar de Soria')">
+            <span class="flecha">→</span>
+            <h3>Almenar de Soria</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Bliecos')">
+            <span class="flecha">→</span>
+            <h3>Bliecos</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Buberos')">
+            <span class="flecha">→</span>
+            <h3>Buberos</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Cabrejas del Campo')">
+            <span class="flecha">→</span>
+            <h3>Cabrejas del Campo</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Candilichera')">
+            <span class="flecha">→</span>
+            <h3>Candilichera</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Carabantes')">
+            <span class="flecha">→</span>
+            <h3>Carabantes</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Cihuela')">
+            <span class="flecha">→</span>
+            <h3>Cihuela</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Ciria')">
+            <span class="flecha">→</span>
+            <h3>Ciria</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Deza')">
+            <span class="flecha">→</span>
+            <h3>Deza</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Gómara')">
+            <span class="flecha">→</span>
+            <h3>Gómara</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Hinojosa del Campo')">
+            <span class="flecha">→</span>
+            <h3>Hinojosa del Campo</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Pinilla del Campo')">
+            <span class="flecha">→</span>
+            <h3>Pinilla del Campo</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Portillo de Soria')">
+            <span class="flecha">→</span>
+            <h3>Portillo de Soria</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Quiñonería')">
+            <span class="flecha">→</span>
+            <h3>Quiñonería</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Reznos')">
+            <span class="flecha">→</span>
+            <h3>Reznos</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Tahahuerce')">
+            <span class="flecha">→</span>
+            <h3>Tahahuerce</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Tejado')">
+            <span class="flecha">→</span>
+            <h3>Tejado</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Torrubia de Soria')">
+            <span class="flecha">→</span>
+            <h3>Torrubia de Soria</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+
+        <div class="municipio" onclick="abrirMunicipio('Villaseca de Arciel')">
+            <span class="flecha">→</span>
+            <h3>Villaseca de Arciel</h3>
+            <p>Consultar municipio</p>
+        </div>
+
+    </div>
+
+
+    <!-- BOTÓN VOLVER -->
+
+    <div class="volver">
+
+        <a class="btn" href="index.html">
+            ← Volver a la página principal
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VENTANA MUNICIPIO
+========================= -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-contenido">
+
+        <span class="cerrar" onclick="cerrarMunicipio()">
+            &times;
+        </span>
+
+        <h3 id="nombreMunicipio">
+            Municipio
+        </h3>
+
+
+        <div class="info-municipio">
+
+            <div class="dato">
+
+                <strong id="poblacion">
+                    —
+                </strong>
+
+                <span>
+                    Población
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong id="hombres">
+                    —
+                </strong>
+
+                <span>
+                    Hombres
+                </span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong id="mujeres">
+                    —
+                </strong>
+
+                <span>
+                    Mujeres
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <p class="descripcion" id="descripcion">
+
+            Aquí podremos añadir posteriormente
+            la descripción, patrimonio, historia,
+            localización y otros datos del municipio.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 Soria Inimaginable
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function abrirMunicipio(nombre){
+
+    document.getElementById("nombreMunicipio").textContent = nombre;
+
+    /*
+       AQUÍ PODREMOS AÑADIR LOS DATOS
+       INDIVIDUALES DE CADA MUNICIPIO.
+
+       Por ahora aparecen como "—".
+    */
+
+    document.getElementById("poblacion").textContent = "—";
+    document.getElementById("hombres").textContent = "—";
+    document.getElementById("mujeres").textContent = "—";
+
+    document.getElementById("descripcion").textContent =
+        "Aquí podremos añadir posteriormente la información de " +
+        nombre +
+        ", incluyendo población, evolución demográfica, patrimonio, localización y otros datos de interés.";
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+
+function cerrarMunicipio(){
+
+    document.getElementById("modal").style.display = "none";
+
+}
+
+
+/* Cerrar pulsando fuera de la ventana */
+
+window.onclick = function(event){
+
+    const modal = document.getElementById("modal");
+
+    if(event.target === modal){
+
+        modal.style.display = "none";
+
+    }
+
+}
+
+</script>
+
 
 </body>
 </html>
+```
