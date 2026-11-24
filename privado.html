@@ -1,69 +1,305 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Zona Privada - Soria Inimaginable</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
-    #login-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-    input { display: block; margin: 10px auto; padding: 10px; width: 220px; border: 1px solid #ccc; border-radius: 5px; }
-    button { padding: 10px 20px; background-color: #2ea44f; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
-    button:hover { background-color: #2c974b; }
-    #contenido-privado { display: none; max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 10px; }
-    img { max-width: 100%; border-radius: 8px; margin-top: 15px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Restringido | Sistema Rojiblanco</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --atleti-red: #CB3524;
+            --atleti-dark-red: #a32618;
+            --atleti-blue: #272E61;
+            --bg-dark: #0f1322;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--atleti-blue) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* --- PANTALLA DE LOGIN (ESTILO TERMINAL) --- */
+        #login-box {
+            background: #161b2e;
+            border: 2px solid var(--atleti-red);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(203, 53, 36, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            color: #fff;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        #login-box h2 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .subtitle-tech {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-bottom: 25px;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #58a6ff;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--atleti-red);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--atleti-red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--atleti-dark-red);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #mensaje-error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* --- CONTENIDO PRIVADO --- */
+        #contenido-privado {
+            display: none;
+            max-width: 750px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header-rojiblanco {
+            background: repeating-linear-gradient(
+                90deg,
+                var(--atleti-red),
+                var(--atleti-red) 40px,
+                #ffffff 40px,
+                #ffffff 80px
+            );
+            height: 18px;
+            width: 100%;
+        }
+
+        .banner-titulo {
+            background-color: var(--atleti-blue);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .banner-titulo h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .banner-titulo span {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #a3b1ff;
+        }
+
+        .carta-cuerpo {
+            padding: 35px 40px;
+            line-height: 1.75;
+            font-size: 1.02rem;
+            color: #2d3748;
+            text-align: left;
+        }
+
+        .carta-cuerpo p {
+            margin-bottom: 18px;
+        }
+
+        .cierre-carta {
+            font-weight: 600;
+            color: var(--atleti-blue);
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        /* --- TARJETA TIPO TICKET / REGALO --- */
+        .ticket-regalo {
+            background: #f8fafc;
+            border: 2px dashed var(--atleti-red);
+            border-radius: 12px;
+            padding: 22px;
+            margin: 25px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .ticket-badge {
+            display: inline-block;
+            background: var(--atleti-red);
+            color: white;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .ticket-regalo h3 {
+            color: var(--atleti-blue);
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .ticket-regalo p {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 0 !important;
+        }
+
+        .imagen-contenedor {
+            text-align: center;
+            margin: 25px 0 10px 0;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 4px solid var(--atleti-blue);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-link {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .btn-volver {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--atleti-red);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid var(--atleti-red);
+            padding: 10px 24px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-volver:hover {
+            background-color: var(--atleti-red);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .carta-cuerpo { padding: 25px 20px; }
+            .banner-titulo h1 { font-size: 1.35rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 1. PANTALLA DE USUARIO Y CONTRASEÑA -->
-  <div id="login-box">
-    <h2>Acceso Privado</h2>
-    <input type="text" id="usuario" placeholder="Usuario">
-    <input type="password" id="clave" placeholder="Contraseña">
-    <button onclick="verificarAcceso()">Entrar</button>
-    <p id="mensaje-error" style="color: red; display: none;">Usuario o contraseña incorrectos</p>
-  </div>
+    <!-- 1. PANTALLA DE USUARIO Y CONTRASEÑA -->
+    <div id="login-box">
+        <div class="terminal-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <h2>> ROOT ACCESS</h2>
+        <p class="subtitle-tech">// Introduce credenciales para desbloquear</p>
+        
+        <input type="text" id="usuario" placeholder="Usuario">
+        <input type="password" id="clave" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') verificarAcceso()">
+        <button onclick="verificarAcceso()">Ejecutar_Acceso()</button>
+        
+        <p id="mensaje-error">[ERROR 403]: Acceso denegado. Revisa los datos.</p>
+    </div>
 
-  <!-- 2. CONTENIDO OCULTO (TEXTO Y FOTO) -->
-  <div id="contenido-privado">
-    <h1>Bienvenido a la sección exclusiva</h1>
-    <p>Esta loca, pesada, idiota o como me quieras llamar tiene una regla que intenta cumplir siempre: nunca hay que renunciar a los sueños, porque nunca sabes cuándo vas a tener la oportunidad de hacerlos realidad. A veces los posponemos pensando que ya habrá otro momento, que más adelante tendremos tiempo o que surgirán mejores ocasiones, pero ¿y si ese momento nunca llega?
+    <!-- 2. CONTENIDO OCULTO (TEXTO Y FOTO) -->
+    <div id="contenido-privado">
+        <div class="header-rojiblanco"></div>
+        <div class="banner-titulo">
+            <span>> STATUS: ACCESO CONCEDIDO 🔴⚪</span>
+            <h1>¡Te vas a ver al Atleti!</h1>
+        </div>
 
-El ahorro y yo nos queremos, sí, pero en su justa medida. Desde que volví a nacer después de mi accidente, tengo una filosofía bastante clara: intentar cumplir todo aquello que deseo, porque la vida puede cambiar de un día para otro y no quiero quedarme con las ganas de haber hecho algo por haberlo dejado para mañana.
+        <div class="carta-cuerpo">
+            <p>Esta loca, pesada, idiota o como me quieras llamar tiene una regla que intenta cumplir siempre: nunca hay que renunciar a los sueños, porque nunca sabes cuándo vas a tener la oportunidad de hacerlos realidad. A veces los posponemos pensando que ya habrá otro momento, que más adelante tendremos tiempo o que surgirán mejores ocasiones, pero ¿y si ese momento nunca llega?</p>
 
-Cuando tuve el accidente, en febrero de 2024, tenía dos deseos muy presentes. El primero era ir a un concierto de mi cantante favorito, Antonio José, y, puestos a pedir, quería verlo con buenas vistas. Así que me compré unas entradas para ir a verlo a Mallorca. El segundo era vivir San Fermín, y lo cumplí el 7 de julio de 2025. Y, por si fuera poco, este 2026 he vuelto a repetir la experiencia.
+            <p>El ahorro y yo nos queremos, sí, pero en su justa medida. Desde que volví a nacer después de mi accidente, tengo una filosofía bastante clara: intentar cumplir todo aquello que deseo, porque la vida puede cambiar de un día para otro y no quiero quedarme con las ganas de haber hecho algo por haberlo dejado para mañana.</p>
 
-¿Y sabes qué? No me arrepiento de ninguno de esos caprichos, porque he aprendido que los sueños no están para quedarse guardados en una lista de cosas pendientes, sino para perseguirlos y, siempre que podamos, convertirlos en recuerdos. Nunca sabemos qué nos depara la vida, así que no merece la pena esperar eternamente al momento perfecto.
+            <p>Cuando tuve el accidente, en febrero de 2024, tenía dos deseos muy presentes. El primero era ir a un concierto de mi cantante favorito, Antonio José, y, puestos a pedir, quería verlo con buenas vistas. Así que me compré unas entradas para ir a verlo a Mallorca. El segundo era vivir San Fermín, y lo cumplí el 7 de julio de 2025. Y, por si fuera poco, este 2026 he vuelto a repetir la experiencia.</p>
 
-Y ahora me dirás que soy una pesada, que vaya parrafada y que me he puesto a escribir el Quijote, pero ¿qué sentido tiene hacerte un regalo sin acompañarlo de una pequeña cursilada? A mí me gusta pensar que la magia también está en esas pequeñas cosas, en los detalles, en las palabras y en hacerle saber a alguien que has pensado en él. Porque, al final, muchas veces no importa tanto el regalo como lo que hay detrás de él.
-
-Así que disfruta muchísimo de este regalo, ve, emociónate, canta, anima y, sobre todo, cumple un sueño. Que yo, con verte esa carita de felicidad, tengo más que suficiente.
-
-Y acuérdate un poquito de mí cuando estés allí, porque, aunque sea desde la distancia, me hará muchísima ilusión saber que he puesto mi granito de arena para regalarte uno de esos momentos que se quedan guardados para siempre.
-
-Que nunca nos falten sueños que perseguir ni ganas de vivirlos.</p>
-    <img src="soria-inimaginable.jpg.jpeg" alt="Imagen privada">
-    <br><br>
-    <a href="index.html">Volver a la página principal</a>
-  </div>
-
-  <script>
-    function verificarAcceso() {
-      // CAMBIA AQUÍ TU USUARIO Y CONTRASEÑA
-      const usuarioCorrecto = "Vadillo";
-      const claveCorrecta = "pesada";
-
-      const userIngresado = document.getElementById("usuario").value;
-      const passIngresada = document.getElementById("clave").value;
-
-      if (userIngresado === usuarioCorrecto && passIngresada === claveCorrecta) {
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("contenido-privado").style.display = "block";
-      } else {
-        document.getElementById("mensaje-error").style.display = "block";
-      }
-    }
-  </script>
-
-</body>
-</html>
+            <p>¿Y sabes qué? No me arrepiento de ninguno de esos caprichos, porque he aprendido que los sueños no están para quedarse guardados en una lista de cosas pendientes, sino para perseguirlos y, siempre que podamos, convertirlos en recuerdos. Nunca sabemos qué nos depara la vida, así que no merece la pena esperar eternamente al momento perfecto.</p>
