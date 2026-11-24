@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Privada - Soria Inimaginable</title>
+    <title>Acceso Restringido | Sistema Rojiblanco</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
@@ -26,15 +26,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px 20px;
+            padding: 20px;
             color: #333;
         }
 
-        body.abierto {
-            align-items: flex-start;
-        }
-
-        /* --- PANTALLA DE LOGIN --- */
+        /* --- PANTALLA DE LOGIN (ESTILO TERMINAL / HACKER) --- */
         #login-box {
             background: #161b2e;
             border: 2px solid var(--atleti-red);
@@ -126,12 +122,11 @@
             display: none;
         }
 
-        /* --- CONTENIDO PRIVADO --- */
+        /* --- CONTENIDO PRIVADO (CARTA + ESTÉTICA ATLETI) --- */
         #contenido-privado {
             display: none;
             max-width: 750px;
             width: 100%;
-            margin: 0 auto;
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
@@ -139,6 +134,7 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Cabecera con rayas rojiblancas */
         .header-rojiblanco {
             background: repeating-linear-gradient(
                 90deg,
@@ -159,7 +155,7 @@
         }
 
         .banner-titulo h1 {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -184,51 +180,17 @@
             margin-bottom: 18px;
         }
 
-        .cierre-carta {
+        .carta-cuerpo p:last-of-type {
             font-weight: 600;
             color: var(--atleti-blue);
             font-size: 1.1rem;
             text-align: center;
-            margin: 25px 0;
-        }
-
-        .ticket-regalo {
-            background: #f8fafc;
-            border: 2px dashed var(--atleti-red);
-            border-radius: 12px;
-            padding: 22px;
-            margin: 25px 0;
-            text-align: center;
-        }
-
-        .ticket-badge {
-            display: inline-block;
-            background: var(--atleti-red);
-            color: white;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .ticket-regalo h3 {
-            color: var(--atleti-blue);
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-        }
-
-        .ticket-regalo p {
-            font-size: 0.95rem;
-            color: #4a5568;
-            margin-bottom: 0;
+            margin-top: 25px;
         }
 
         .imagen-contenedor {
             text-align: center;
-            margin: 25px 0 10px 0;
+            margin: 25px 0;
         }
 
         img {
@@ -267,7 +229,7 @@
 
         @media (max-width: 600px) {
             .carta-cuerpo { padding: 25px 20px; }
-            .banner-titulo h1 { font-size: 1.35rem; }
+            .banner-titulo h1 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -280,10 +242,10 @@
             <div class="dot yellow"></div>
             <div class="dot green"></div>
         </div>
-        <h2>&gt; ROOT ACCESS</h2>
+        <h2>> ROOT ACCESS</h2>
         <p class="subtitle-tech">// Introduce credenciales para desbloquear</p>
         
-        <input type="text" id="usuario" placeholder="Usuario">
+        <input type="text" id="usuario" placeholder="Usuario (ej. Vadillo)">
         <input type="password" id="clave" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') verificarAcceso()">
         <button onclick="verificarAcceso()">Ejecutar_Acceso()</button>
         
@@ -294,8 +256,8 @@
     <div id="contenido-privado">
         <div class="header-rojiblanco"></div>
         <div class="banner-titulo">
-            <span>&gt; STATUS: ACCESO CONCEDIDO 🔴⚪</span>
-            <h1>¡Te vas a ver al Atleti!</h1>
+            <span>> STATUS: ACCESO CONCEDIDO 🔴⚪</span>
+            <h1>¡Nos vamos a ver al Atleti!</h1>
         </div>
 
         <div class="carta-cuerpo">
@@ -306,3 +268,13 @@
             <p>Cuando tuve el accidente, en febrero de 2024, tenía dos deseos muy presentes. El primero era ir a un concierto de mi cantante favorito, Antonio José, y, puestos a pedir, quería verlo con buenas vistas. Así que me compré unas entradas para ir a verlo a Mallorca. El segundo era vivir San Fermín, y lo cumplí el 7 de julio de 2025. Y, por si fuera poco, este 2026 he vuelto a repetir la experiencia.</p>
 
             <p>¿Y sabes qué? No me arrepiento de ninguno de esos caprichos, porque he aprendido que los sueños no están para quedarse guardados en una lista de cosas pendientes, sino para perseguirlos y, siempre que podamos, convertirlos en recuerdos. Nunca sabemos qué nos depara la vida, así que no merece la pena esperar eternamente al momento perfecto.</p>
+
+            <p>Y ahora me dirás que soy una pesada, que vaya parrafada y que me he puesto a escribir el Quijote, pero ¿qué sentido tiene hacerte un regalo sin acompañarlo de una pequeña cursilada? A mí me gusta pensar que la magia también está en esas pequeñas cosas, en los detalles, en las palabras y en hacerle saber a alguien que has pensado en él. Porque, al final, muchas veces no importa tanto el regalo como lo que hay detrás de él.</p>
+
+            <p>Así que disfruta muchísimo de este regalo, ve, emociónate, canta, anima y, sobre todo, cumple un sueño. Que yo, con verte esa carita de felicidad, tengo más que suficiente.</p>
+
+            <p>Y acuérdate un poquito de mí cuando estés allí, porque, aunque sea desde la distancia, me hará muchísima ilusión saber que he puesto mi granito de arena para regalarte uno de esos momentos que se quedan guardados para siempre.</p>
+
+            <p>Que nunca nos falten sueños que perseguir ni ganas de vivirlos. ❤️🤍</p>
+
+            <div class="imagen-contenedor">
