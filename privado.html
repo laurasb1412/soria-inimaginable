@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Restringido | Sistema Rojiblanco</title>
+    <title>Zona Privada - Soria Inimaginable</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
@@ -26,8 +26,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px 20px;
             color: #333;
+        }
+
+        /* Evita que la carta larga se corte por arriba al abrirse */
+        body.abierto {
+            align-items: flex-start;
         }
 
         /* --- PANTALLA DE LOGIN (ESTILO TERMINAL) --- */
@@ -127,6 +132,7 @@
             display: none;
             max-width: 750px;
             width: 100%;
+            margin: 0 auto;
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
@@ -195,7 +201,6 @@
             padding: 22px;
             margin: 25px 0;
             text-align: center;
-            position: relative;
         }
 
         .ticket-badge {
@@ -220,7 +225,7 @@
         .ticket-regalo p {
             font-size: 0.95rem;
             color: #4a5568;
-            margin-bottom: 0 !important;
+            margin-bottom: 0;
         }
 
         .imagen-contenedor {
@@ -277,7 +282,7 @@
             <div class="dot yellow"></div>
             <div class="dot green"></div>
         </div>
-        <h2>> ROOT ACCESS</h2>
+        <h2>&gt; ROOT ACCESS</h2>
         <p class="subtitle-tech">// Introduce credenciales para desbloquear</p>
         
         <input type="text" id="usuario" placeholder="Usuario">
@@ -291,7 +296,7 @@
     <div id="contenido-privado">
         <div class="header-rojiblanco"></div>
         <div class="banner-titulo">
-            <span>> STATUS: ACCESO CONCEDIDO 🔴⚪</span>
+            <span>&gt; STATUS: ACCESO CONCEDIDO 🔴⚪</span>
             <h1>¡Te vas a ver al Atleti!</h1>
         </div>
 
